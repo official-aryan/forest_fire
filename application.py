@@ -4,18 +4,18 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-app = Flask(__name__)
+application = Flask(__name__)
+app=application
 
-#import ridge regressor model and standard scaler pickle
+## import ridge regresor model and standard scaler pickle
 ridge_model=pickle.load(open('models/ridge.pkl','rb'))
 standard_scaler=pickle.load(open('models/scaler.pkl','rb'))
 
-##Route for homepage
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+## Route for home page
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-##route home page
 @app.route('/predictdata',methods=['GET','POST'])
 def predict_datapoint():
     if request.method=='POST':
@@ -36,6 +36,7 @@ def predict_datapoint():
 
     else:
         return render_template('home.html')
+
 
 if __name__=="__main__":
     app.run(host="0.0.0.0")
